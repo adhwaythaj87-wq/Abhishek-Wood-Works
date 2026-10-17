@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Local test outputs & screenshots
+test_results/
+screenshots/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local environment
+.env
+.env.local

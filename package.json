@@ -1,0 +1,23 @@
+{
+  "name": "abhishek-wood-works",
+  "version": "1.0.0",
+  "description": "Portfolio website for Abhishek Wood Works - Custom woodwork, furniture and interiors",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "dev:css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "optimize-images": "python scripts/optimize_images.py"
+  },
+  "keywords": [
+    "furniture",
+    "woodwork",
+    "interiors",
+    "custom-furniture"
+  ],
+  "author": "Abhishek Wood Works",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.17"
+  }
+}
