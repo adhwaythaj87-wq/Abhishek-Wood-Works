@@ -18,7 +18,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-02",
     "title": "Artisan Slatted Accent Chair with Terracotta Bolster",
-    "category": "Sofas & Seating",
+    "category": "Sofas",
     "material": "Seasoned Teak & Handloom Fabric",
     "description": "Hand-planed horizontal slat backrest with gentle ergonomic curve, fitted with high-density foam cushion and hand-stitched cylindrical bolster.",
     "orig_file": "1790495521516.jpg.jpeg",
@@ -66,7 +66,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-05",
     "title": "Teak Wood Slat Sofa with Storage Base",
-    "category": "Sofas & Seating",
+    "category": "Sofas",
     "material": "Seasoned Teak Timber",
     "description": "Custom artisan sofa featuring curved hand-finished armrests, back slat support, deep seat framing, and concealed base storage.",
     "orig_file": "1790495728758.jpg.jpeg",
@@ -194,7 +194,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-13",
     "title": "L-Shaped Teak Sectional Sofa & Cabriole Coffee Table",
-    "category": "Sofas & Seating",
+    "category": "Sofas",
     "material": "Solid Teak Wood & Rust Orange Upholstery",
     "description": "Expansive corner sectional living room sofa in rich honey teak wood paired with a hand-carved floral cabriole-leg coffee table.",
     "orig_file": "1790496663240.jpg.jpeg",
@@ -210,7 +210,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-14",
     "title": "Walnut Open Bookshelf & Media Console with X-Brace",
-    "category": "TV Units & Partitions",
+    "category": "Living",
     "material": "American Walnut Finish & Solid Wood Framing",
     "description": "Architectural asymmetrical bookshelf and media console featuring cross-braced center display alcove and modular cubbies.",
     "orig_file": "1790496739030.jpg.jpeg",
@@ -242,7 +242,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-16",
     "title": "Coffered Teak Main Entrance Door with Fluted Glass",
-    "category": "Doors & Windows",
+    "category": "Doors",
     "material": "100% Solid Seasoned Teak",
     "description": "Grand two-leaf main entrance door crafted with nine coffered raised-field wood panels, brushed steel vertical handle, and horizontal fluted privacy glass.",
     "orig_file": "1790506776206.jpg.jpeg",
@@ -258,7 +258,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-17",
     "title": "Warm Cream Bedside Nightstand with Brushed Brass Knobs",
-    "category": "Beds & Bedroom",
+    "category": "Bedroom",
     "material": "Lacquered Hardwood & Solid Brass Accents",
     "description": "Custom bedside nightstand with upper pull drawer and lower swing cabinet, designed to pair seamlessly with upholstered bedroom suites.",
     "orig_file": "1790506845672.jpg.jpeg",
@@ -274,7 +274,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-18",
     "title": "3-Panel Architectural Window with Frosted Geometric Art Glass",
-    "category": "Doors & Windows",
+    "category": "Doors",
     "material": "Teak Wood Frame & Toughened Art Glass",
     "description": "Triple-panel external window frame built from teak with security grills and decorative etched geometric glass lights.",
     "orig_file": "1790506884483.jpg.jpeg",
@@ -306,7 +306,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-20",
     "title": "Sculptural Curved Teak Barstools in Sky Blue Leatherette",
-    "category": "Sofas & Seating",
+    "category": "Dining",
     "material": "Teak Hardwood & Marine Blue Leatherette",
     "description": "Pair of ergonomic counter-height barstools with curved bentwood backrests, double foot stretchers, and tailored blue cushions.",
     "orig_file": "1790506973624.jpg.jpeg",
@@ -322,7 +322,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-21",
     "title": "Contemporary 3-Seater Sofa with Fluted Timber Arms",
-    "category": "Sofas & Seating",
+    "category": "Sofas",
     "material": "Dark Walnut Finish & Grey Heather Weave",
     "description": "Three-seater living room sofa with wide boxed timber armrests featuring horizontal flute carvings and supportive lumbar pillows.",
     "orig_file": "1790507013071.jpg.jpeg",
@@ -338,7 +338,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-22",
     "title": "Designer Dual-Wood Door with Asymmetrical Glass Insets",
-    "category": "Doors & Windows",
+    "category": "Doors",
     "material": "Teak Outer Frame & Walnut Center Panel",
     "description": "Statement entry door combining light honey teak borders with dark walnut core paneling, accented by asymmetric frosted glass slits.",
     "orig_file": "1790507090416.jpg.jpeg",
@@ -370,7 +370,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-24",
     "title": "Teak Wood Interior Door with Sweeping CNC Arc Grooves",
-    "category": "Doors & Windows",
+    "category": "Doors",
     "material": "Seasoned Teak Wood & Antique Brass Lever",
     "description": "Interior room door with subtle continuous circular arc routing celebrating the natural grain patterns of teak.",
     "orig_file": "1790507286793.jpg.jpeg",
@@ -386,7 +386,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-25",
     "title": "Full-Wall Modular TV Unit & Display Partition Grid",
-    "category": "TV Units & Partitions",
+    "category": "Living",
     "material": "Teak Wood Veneer & Smoked Glass Base Cabinets",
     "description": "Symmetrical full-wall entertainment unit with central TV mounting panel, surrounding open lattice shelving grid, and dark base drawers.",
     "orig_file": "1790507330037.jpg.jpeg",
@@ -402,7 +402,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-26",
     "title": "Heritage Teak Daybed / Diwan with Lion-Paw Carved Legs",
-    "category": "Beds & Bedroom",
+    "category": "Bedroom",
     "material": "100% Raw Seasoned Teak",
     "description": "Traditional Indian diwan daybed built from raw solid teak wood, featuring a slatted recline back and hand-carved lion-paw claw feet.",
     "orig_file": "1790507405276.jpg.jpeg",
@@ -418,7 +418,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-27",
     "title": "5-Tier Pyramid Corner Display Etagere Stand",
-    "category": "TV Units & Partitions",
+    "category": "Living",
     "material": "Solid Teak with Tapered Stile Frame",
     "description": "Five-tier freestanding corner what-not shelf with sweeping outward-curved base legs and graduated shelves for artifacts and planters.",
     "orig_file": "1790507453367.jpg.jpeg",
@@ -434,7 +434,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-28",
     "title": "Architectural Timber Partition Arch with Low Book Ledge",
-    "category": "TV Units & Partitions",
+    "category": "Living",
     "material": "Hardwood Veneer & Walnut Polish",
     "description": "Space-defining room divider portal bridging the living room and modular kitchen, featuring integrated low storage shelves.",
     "orig_file": "1790507499478.jpg.jpeg",
@@ -450,7 +450,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-29",
     "title": "Hand-Carved Heritage Pooja / Temple Door with Floral Frame",
-    "category": "Doors & Windows",
+    "category": "Doors",
     "material": "A-Grade Solid Teak & Traditional Carving",
     "description": "Exquisite temple room entrance door featuring intricately hand-carved floral vine architrave, nine floral-boss panels, and solid brass pull ring.",
     "orig_file": "1790507674542.jpg.jpeg",
@@ -466,7 +466,7 @@ window.GALLERY_ITEMS = [
   {
     "id": "item-30",
     "title": "Solid Teak Slat Garden / Verandah Bench & Low Table",
-    "category": "Sofas & Seating",
+    "category": "Sofas",
     "material": "All-Weather Solid Teak Timber",
     "description": "Two-piece patio/verandah furniture set with horizontal slat two-seater bench and matching recessed-frame cabriole coffee table.",
     "orig_file": "1790507733748.jpg.jpeg",

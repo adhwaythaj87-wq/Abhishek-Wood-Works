@@ -70,6 +70,87 @@ function initHeader() {
 }
 
 /* ==========================================================================
+   Category & Data Helpers (Single Source of Truth)
+   ========================================================================== */
+function getCatSlug(id) {
+  const catObj = (window.SITE_CONFIG?.categories || []).find(c => c.id === id);
+  if (catObj && catObj.slug) return catObj.slug;
+  if (!id) return 'wardrobes';
+  return id.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function getActiveCategories() {
+  const configCats = window.SITE_CONFIG?.categories || [];
+  const items = window.GALLERY_ITEMS || [];
+  
+  // Extract all categories actually present in GALLERY_ITEMS
+  const itemCats = new Set(items.map(i => i.category).filter(Boolean));
+  
+  const result = [];
+  const seenIds = new Set();
+  
+  // 1. First preserve the intentional order from SITE_CONFIG.categories
+  configCats.forEach(cat => {
+    if (itemCats.has(cat.id)) {
+      result.push({
+        id: cat.id,
+        label: cat.label || cat.id,
+        shortLabel: cat.shortLabel || cat.label || cat.id,
+        fullName: cat.fullName || cat.label || cat.id,
+        slug: cat.slug || getCatSlug(cat.id)
+      });
+      seenIds.add(cat.id);
+    }
+  });
+
+  // 2. Automatically discover any new category added to GALLERY_ITEMS (self-updating single source of truth)
+  itemCats.forEach(catId => {
+    if (!seenIds.has(catId)) {
+      result.push({
+        id: catId,
+        label: catId,
+        shortLabel: catId,
+        fullName: catId,
+        slug: getCatSlug(catId)
+      });
+      seenIds.add(catId);
+    }
+  });
+
+  // Fallback if empty
+  if (result.length === 0) {
+    result.push({ id: 'Wardrobes', label: 'Wardrobes', shortLabel: 'Wardrobes', fullName: 'Custom Wardrobes & Dressing Units', slug: 'wardrobes' });
+  }
+
+  return result;
+}
+
+function getCategoryObj(catId) {
+  const categories = getActiveCategories();
+  return categories.find(c => c.id === catId) || categories[0] || {
+    id: catId,
+    label: catId,
+    shortLabel: catId,
+    fullName: catId,
+    slug: getCatSlug(catId)
+  };
+}
+
+function findCatBySlug(slug, categories) {
+  const cats = categories || getActiveCategories();
+  if (!slug) return cats[0]?.id || 'Wardrobes';
+  const clean = slug.toLowerCase().replace('#', '').trim();
+  if (!clean || clean === 'all' || clean === 'work') return cats[0]?.id || 'Wardrobes';
+  const match = cats.find(c => 
+    c.slug === clean || 
+    (c.shortLabel && c.shortLabel.toLowerCase() === clean) || 
+    (c.id && c.id.toLowerCase() === clean) || 
+    getCatSlug(c.id) === clean
+  );
+  return match ? match.id : null;
+}
+
+/* ==========================================================================
    Hero Slider (Warm Natural Full-Bleed Crossfade, Subtle Zoom & Accessible Controls)
    ========================================================================== */
 function initHeroSlider() {
@@ -81,6 +162,22 @@ function initHeroSlider() {
   const counterText = document.getElementById('hero-counter-text');
 
   if (!hero || slides.length === 0) return;
+
+  // Synchronize each hero slide with GALLERY_ITEMS so categories and targets always match 1:1
+  slides.forEach((slide) => {
+    const img = slide.querySelector('img');
+    if (img && window.GALLERY_ITEMS) {
+      const srcAttr = img.getAttribute('src') || '';
+      const matchedItem = window.GALLERY_ITEMS.find(item => {
+        const filePrefix = item.orig_file.split('.')[0];
+        return srcAttr.includes(filePrefix);
+      });
+      if (matchedItem) {
+        slide.setAttribute('data-category', matchedItem.category);
+        slide.setAttribute('data-slug', getCatSlug(matchedItem.category));
+      }
+    }
+  });
 
   let currentIndex = 0;
   let timer = null;
@@ -235,26 +332,6 @@ let activeCategory = 'Wardrobes';
 let activeDensity = 'comfortable';
 let currentFilteredItems = [];
 
-function getCatSlug(id) {
-  const catObj = (window.SITE_CONFIG?.categories || []).find(c => c.id === id);
-  if (catObj && catObj.slug) return catObj.slug;
-  if (!id) return 'wardrobes';
-  return id.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-}
-
-function findCatBySlug(slug, categories) {
-  if (!slug) return 'Wardrobes';
-  const clean = slug.toLowerCase().replace('#', '').trim();
-  if (!clean || clean === 'all' || clean === 'work') return 'Wardrobes';
-  const match = categories.find(c => 
-    c.slug === clean || 
-    c.shortLabel.toLowerCase() === clean || 
-    c.id.toLowerCase() === clean || 
-    getCatSlug(c.id) === clean
-  );
-  return match ? match.id : null;
-}
-
 function initGallery() {
   const desktopCatList = document.getElementById('desktop-category-list');
   const densityComfortableBtn = document.getElementById('density-comfortable-btn');
@@ -268,20 +345,13 @@ function initGallery() {
 
   if (!galleryGrid || !window.GALLERY_ITEMS) return;
 
-  const categories = window.SITE_CONFIG ? window.SITE_CONFIG.categories : [
-    { id: "Sofas & Seating", label: "Sofas & Seating", shortLabel: "Sofas", slug: "sofas" },
-    { id: "Dining", label: "Dining", shortLabel: "Dining", slug: "dining" },
-    { id: "Wardrobes", label: "Wardrobes", shortLabel: "Wardrobes", slug: "wardrobes" },
-    { id: "Kitchens", label: "Kitchens", shortLabel: "Kitchens", slug: "kitchens" },
-    { id: "Doors & Windows", label: "Doors & Windows", shortLabel: "Doors", slug: "doors" },
-    { id: "TV Units & Partitions", label: "TV Units & Partitions", shortLabel: "TV Units", slug: "tv-units" },
-    { id: "Beds & Bedroom", label: "Beds & Bedroom", shortLabel: "Beds", slug: "beds" }
-  ];
+  const categories = getActiveCategories();
 
   // Render Centered Wrapping Tabs (Mobile 2 rows, Tablet/Desktop 1 row)
   function renderCategoryTabs() {
     if (!categoryTabsContainer) return;
-    categoryTabsContainer.innerHTML = categories.map(cat => {
+    const cats = getActiveCategories();
+    categoryTabsContainer.innerHTML = cats.map(cat => {
       const isActive = cat.id === activeCategory;
       return `
         <button
@@ -310,7 +380,8 @@ function initGallery() {
   // Render Desktop Sidebar Categories (Serif type, quiet count, thin amber line on active)
   function renderDesktopCategories() {
     if (!desktopCatList) return;
-    desktopCatList.innerHTML = categories.map(cat => {
+    const cats = getActiveCategories();
+    desktopCatList.innerHTML = cats.map(cat => {
       const count = window.GALLERY_ITEMS.filter(i => i.category === cat.id).length;
       const isActive = cat.id === activeCategory;
       return `
@@ -369,8 +440,9 @@ function initGallery() {
 
   // Set Category
   function setCategory(catId, updateUrl = true) {
-    activeCategory = catId;
-    const activeCatObj = categories.find(c => c.id === catId) || categories[0];
+    const cats = getActiveCategories();
+    const activeCatObj = cats.find(c => c.id === catId) || cats[0];
+    activeCategory = activeCatObj.id;
 
     renderCategoryTabs();
     renderDesktopCategories();
@@ -380,7 +452,7 @@ function initGallery() {
     }
 
     if (updateUrl) {
-      const slug = getCatSlug(catId);
+      const slug = getCatSlug(activeCategory);
       history.replaceState(null, '', '#' + slug);
     }
 
@@ -459,7 +531,7 @@ function initGallery() {
   }
 
   if (resetFilterBtn) {
-    resetFilterBtn.addEventListener('click', () => setCategory('Wardrobes', true));
+    resetFilterBtn.addEventListener('click', () => setCategory(categories[0]?.id || 'Wardrobes', true));
   }
 
   // Handle URL hash on initial page load
@@ -469,11 +541,11 @@ function initGallery() {
     if (pieceMatch) {
       activeCategory = pieceMatch.category;
     } else {
-      const matchedCat = findCatBySlug(initialHash, categories);
-      activeCategory = matchedCat || 'Wardrobes';
+      const matchedCat = findCatBySlug(initialHash, getActiveCategories());
+      activeCategory = matchedCat || categories[0]?.id || 'Wardrobes';
     }
   } else {
-    activeCategory = 'Wardrobes';
+    activeCategory = categories[0]?.id || 'Wardrobes';
   }
 
   // Initial renders
@@ -498,7 +570,7 @@ function initGallery() {
       if (itemIdx !== -1) openLightbox(itemIdx);
       return;
     }
-    const cat = findCatBySlug(newHash, categories);
+    const cat = findCatBySlug(newHash, getActiveCategories());
     if (cat && cat !== activeCategory) {
       setCategory(cat, false);
     }
@@ -772,15 +844,19 @@ function updateLightboxContent() {
   if (counterEl) counterEl.textContent = counterText;
   if (mobileCounterEl) mobileCounterEl.textContent = counterText;
 
-  // Title & Category
+  // Title & Category (Display full descriptive name in lightbox)
   const titleEl = document.getElementById('lightbox-title');
   const categoryEl = document.getElementById('lightbox-category');
   const mobileTitle = document.getElementById('lightbox-mobile-title');
   const mobileCategory = document.getElementById('lightbox-mobile-category');
+  
+  const catObj = getCategoryObj(item.category);
+  const displayCategory = catObj.fullName || item.category;
+
   if (titleEl) titleEl.textContent = item.title;
-  if (categoryEl) categoryEl.textContent = item.category;
+  if (categoryEl) categoryEl.textContent = displayCategory;
   if (mobileTitle) mobileTitle.textContent = item.title;
-  if (mobileCategory) mobileCategory.textContent = item.category;
+  if (mobileCategory) mobileCategory.textContent = displayCategory;
 
   // Material: Only display if defined in config
   const matWrapper = document.getElementById('lightbox-material-wrapper');
@@ -813,7 +889,7 @@ function updateLightboxContent() {
   }
 
   // WhatsApp Share Link
-  const businessPhone = window.SITE_CONFIG?.business?.whatsappClean || "919876543210";
+  const businessPhone = window.SITE_CONFIG?.business?.whatsappClean || "919846935127";
   const shareUrl = `${window.location.origin}${window.location.pathname}#${item.id}`;
   const shareMsg = `Hello Abhishek Wood Works, I am looking at "${item.title}" (${item.category}) in your portfolio:\n${shareUrl}`;
   const shareHref = `https://wa.me/${businessPhone}?text=${encodeURIComponent(shareMsg)}`;
@@ -944,7 +1020,7 @@ function initEnquiryForm() {
       const timeline = document.getElementById('enquiry-timeline')?.value || '';
       const message = (document.getElementById('enquiry-message')?.value || '').trim();
 
-      const businessPhone = window.SITE_CONFIG?.business?.whatsappClean || "919876543210";
+      const businessPhone = window.SITE_CONFIG?.business?.whatsappClean || "919846935127";
 
       let text = `*New Custom Woodwork Enquiry*\n`;
       if (name) text += `• *Name:* ${name}\n`;

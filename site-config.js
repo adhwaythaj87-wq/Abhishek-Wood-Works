@@ -9,13 +9,13 @@ window.SITE_CONFIG = {
     name: "Abhishek Wood Works",
     tagline: "Custom furniture and interiors, made to order.",
     description: "Handcrafted custom woodwork, bespoke furniture, and architectural interiors tailored to your space.",
-    phone: "[TODO: Add your phone number, e.g. +91 98765 43210]",
-    phoneClean: "919876543210", // Digits only with country code for tel: links
-    whatsapp: "[TODO: Add your WhatsApp number, e.g. +91 98765 43210]",
-    whatsappClean: "919876543210", // Digits only with country code for wa.me links
-    email: "[TODO: Add your email, e.g. info@abhishekwoodworks.com]",
+    phone: "+91 98469 35127",
+    phoneClean: "919846935127", // Digits only with country code for tel: links
+    whatsapp: "+91 98469 35127",
+    whatsappClean: "919846935127", // Digits only with country code for wa.me links
+    email: "charayamshibu@gmail.com",
     address: "[TODO: Add workshop street address, city, pin code]",
-    workingHours: "[TODO: Add working hours, e.g. Monday - Saturday: 9:00 AM - 7:30 PM]",
+    workingHours: "8:00 AM - 6:00 PM",
     mapEmbedUrl: "", // [TODO: Add Google Maps embed iframe URL if desired]
     formActionUrl: "https://api.web3forms.com/submit", // Form endpoint (Web3Forms / Formspree)
     formAccessKey: "[TODO: Add your Web3Forms or Formspree access key here]",
@@ -35,13 +35,13 @@ window.SITE_CONFIG = {
   },
 
   categories: [
-    { id: "Sofas & Seating", label: "Sofas & Seating", shortLabel: "Sofas", slug: "sofas" },
-    { id: "Dining", label: "Dining", shortLabel: "Dining", slug: "dining" },
-    { id: "Wardrobes", label: "Wardrobes", shortLabel: "Wardrobes", slug: "wardrobes" },
-    { id: "Kitchens", label: "Kitchens", shortLabel: "Kitchens", slug: "kitchens" },
-    { id: "Doors & Windows", label: "Doors & Windows", shortLabel: "Doors", slug: "doors" },
-    { id: "TV Units & Partitions", label: "TV Units & Partitions", shortLabel: "TV Units", slug: "tv-units" },
-    { id: "Beds & Bedroom", label: "Beds & Bedroom", shortLabel: "Beds", slug: "beds" }
+    { id: "Wardrobes", label: "Wardrobes", shortLabel: "Wardrobes", fullName: "Custom Wardrobes & Dressing Units", slug: "wardrobes" },
+    { id: "Doors", label: "Doors", shortLabel: "Doors", fullName: "Custom Doors & Architectural Windows", slug: "doors" },
+    { id: "Dining", label: "Dining", shortLabel: "Dining", fullName: "Dining Tables, Chairs & Barstools", slug: "dining" },
+    { id: "Sofas", label: "Sofas", shortLabel: "Sofas", fullName: "Custom Sofas & Living Seating", slug: "sofas" },
+    { id: "Kitchens", label: "Kitchens", shortLabel: "Kitchens", fullName: "Modular Kitchens & Cabinetry", slug: "kitchens" },
+    { id: "Living", label: "Living", shortLabel: "Living", fullName: "TV Units, Partitions & Living Shelving", slug: "living" },
+    { id: "Bedroom", label: "Bedroom", shortLabel: "Bedroom", fullName: "Daybeds, Diwans & Bedroom Furniture", slug: "bedroom" }
   ],
 
   about: {
