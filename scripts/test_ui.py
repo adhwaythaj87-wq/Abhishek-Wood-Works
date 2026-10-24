@@ -11,7 +11,7 @@ async def main():
         await page.wait_for_timeout(500)
         
         # Test Bedroom filter
-        await page.locator('button[data-filter="Bedroom"]').click()
+        await page.locator('button[data-cat="Bedroom"]').first.click()
         await page.wait_for_timeout(300)
         
         # Click the bed item
