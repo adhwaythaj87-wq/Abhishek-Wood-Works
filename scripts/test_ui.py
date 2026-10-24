@@ -10,8 +10,8 @@ async def main():
         await page.goto(url)
         await page.wait_for_timeout(500)
         
-        # Test Beds & Bedroom filter
-        await page.locator('button[data-filter="Beds & Bedroom"]').click()
+        # Test Bedroom filter
+        await page.locator('button[data-filter="Bedroom"]').click()
         await page.wait_for_timeout(300)
         
         # Click the bed item

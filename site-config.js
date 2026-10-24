@@ -17,8 +17,6 @@ window.SITE_CONFIG = {
     address: "[TODO: Add workshop street address, city, pin code]",
     workingHours: "8:00 AM - 6:00 PM",
     mapEmbedUrl: "", // [TODO: Add Google Maps embed iframe URL if desired]
-    formActionUrl: "https://api.web3forms.com/submit", // Form endpoint (Web3Forms / Formspree)
-    formAccessKey: "[TODO: Add your Web3Forms or Formspree access key here]",
     social: {
       instagram: "[TODO: Add Instagram profile URL]",
       facebook: "[TODO: Add Facebook page URL]",

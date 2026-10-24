@@ -1007,44 +1007,32 @@ function handleEnquiryPrefill() {
    ========================================================================== */
 function initEnquiryForm() {
   const form = document.getElementById('project-enquiry-form');
-  const whatsappBtn = document.getElementById('whatsapp-direct-submit-btn');
+  if (!form) return;
 
-  if (whatsappBtn) {
-    whatsappBtn.addEventListener('click', (e) => {
-      e.preventDefault();
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-      const name = (document.getElementById('enquiry-name')?.value || '').trim();
-      const phone = (document.getElementById('enquiry-phone')?.value || '').trim();
-      const projectType = document.getElementById('enquiry-project-type')?.value || '';
-      const budget = document.getElementById('enquiry-budget')?.value || '';
-      const timeline = document.getElementById('enquiry-timeline')?.value || '';
-      const message = (document.getElementById('enquiry-message')?.value || '').trim();
+    const name = (document.getElementById('enquiry-name')?.value || '').trim();
+    const phone = (document.getElementById('enquiry-phone')?.value || '').trim();
+    const email = (document.getElementById('enquiry-email')?.value || '').trim();
+    const projectType = document.getElementById('enquiry-project-type')?.value || '';
+    const budget = document.getElementById('enquiry-budget')?.value || '';
+    const timeline = document.getElementById('enquiry-timeline')?.value || '';
+    const message = (document.getElementById('enquiry-message')?.value || '').trim();
 
-      const businessPhone = window.SITE_CONFIG?.business?.whatsappClean || "919846935127";
+    const businessPhone = window.SITE_CONFIG?.business?.whatsappClean || "919846935127";
 
-      let text = `*New Custom Woodwork Enquiry*\n`;
-      if (name) text += `• *Name:* ${name}\n`;
-      if (phone) text += `• *Phone:* ${phone}\n`;
-      if (projectType) text += `• *Requirement:* ${projectType}\n`;
-      if (budget) text += `• *Budget:* ${budget}\n`;
-      if (timeline) text += `• *Timeline:* ${timeline}\n`;
-      if (message) text += `• *Details:* ${message}\n`;
-      text += `\n_Sent via Abhishek Wood Works Portfolio_`;
+    let text = `*New Custom Woodwork Enquiry*\n`;
+    if (name) text += `• *Name:* ${name}\n`;
+    if (phone) text += `• *Phone / WhatsApp:* ${phone}\n`;
+    if (email) text += `• *Email:* ${email}\n`;
+    if (projectType) text += `• *Requirement:* ${projectType}\n`;
+    if (budget) text += `• *Budget:* ${budget}\n`;
+    if (timeline) text += `• *Timeline:* ${timeline}\n`;
+    if (message) text += `• *Details:* ${message}\n`;
+    text += `\n_Sent via Abhishek Wood Works Portfolio_`;
 
-      const encoded = encodeURIComponent(text);
-      window.open(`https://wa.me/${businessPhone}?text=${encoded}`, '_blank');
-    });
-  }
-
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      // Standard HTML submission or AJAX can proceed
-      // If action key is placeholder, give a friendly notice
-      const accessKey = form.querySelector('input[name="access_key"]')?.value;
-      if (accessKey && accessKey.includes('[TODO')) {
-        e.preventDefault();
-        alert('Notice: Form submission backend access key is set to [TODO] in site-config.js. Please use the "Send on WhatsApp Instead" button or configure your Web3Forms/Formspree access key.');
-      }
-    });
-  }
+    const encoded = encodeURIComponent(text);
+    window.open(`https://wa.me/${businessPhone}?text=${encoded}`, '_blank');
+  });
 }
